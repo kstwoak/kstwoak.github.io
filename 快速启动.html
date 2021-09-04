@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>ZINX - 快速启动</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700" rel="stylesheet" type="text/css">
+  <link href="/css/docs.css" rel="stylesheet">
+  
+</head>
+<body>
+  <div class="menu">
+    <div class="logo">
+    </div>
+
+
+  
+    <nav class="menu-nav">
+      
+        <ul class="nav">
+          <span>介绍</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/介绍.html">介绍</a>
+              </li>
+            
+              <li>
+                <a href="/快速启动.html" class="active">快速启动</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+        <ul class="nav">
+          <span>学习资源</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/源码.html">源码</a>
+              </li>
+            
+              <li>
+                <a href="/视频.html">视频</a>
+              </li>
+            
+              <li>
+                <a href="/文档.html">文档</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+        <ul class="nav">
+          <span>开发文档</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/架构介绍.html">架构介绍</a>
+              </li>
+            
+              <li>
+                <a href="/服务端API.html">服务端API</a>
+              </li>
+            
+              <li>
+                <a href="/客户端API.html">客户端API</a>
+              </li>
+            
+              <li>
+                <a href="/配置.html">配置</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+        <ul class="nav">
+          <span>关于</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/开发者.html">开发者</a>
+              </li>
+            
+              <li>
+                <a href="/技术讨论.html">技术讨论</a>
+              </li>
+            
+              <li>
+                <a href="/产品案例.html">产品案例</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+    </nav>
+    <a class="footer" href="https://github.com/aceld/zinx">
+      ZINX on github
+    </a>
+  </div>
+  <div class="page">
+    <div class="header-label">
+    <li class="menu-item">
+            <iframe src="https://ghbtns.com/github-btn.html?user=aceld&repo=zinx&type=star&count=true&size=large&v=3" frameborder="0" scrolling="0" width="150px" height="30px"></iframe>
+    </li>
+    <li class="menu-item">
+            <iframe src="https://ghbtns.com/github-btn.html?user=aceld&repo=zinx&type=fork&count=true&size=large&v=2" frameborder="0" scrolling="0" width="150px" height="30px"></iframe>
+    </li>
+    </div>
+    <div class="page-content">
+      <h1>快速启动</h1>
+      <h2 id="docker方式"><a class="markdownIt-Anchor" href="#docker方式"></a> Docker方式</h2>
+<p>1、克隆项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/aceld/zinx.git</span><br></pre></td></tr></table></figure>
+<p>2、进入服务端样例目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ./zinx/examples/zinx_server</span><br></pre></td></tr></table></figure>
+<p>3、服务端编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make build</span><br></pre></td></tr></table></figure>
+<p>4、服务端容器化</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make image</span><br></pre></td></tr></table></figure>
+<p>6、服务端启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make run</span><br></pre></td></tr></table></figure>
+<p>7、进入客户端样例目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ../zinx_client</span><br></pre></td></tr></table></figure>
+<p>8、启动客户端进行测试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ go run main.go</span><br></pre></td></tr></table></figure>
+<h2 id="完整示例演示"><a class="markdownIt-Anchor" href="#完整示例演示"></a> 完整示例演示</h2>
+<p>1、 编译demo示例，会在<code>zinx/example/zinx_server</code>下得到<code>server</code>, 在<code>zinx/example/zinx_client</code>下得到<code>client</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> zinx/</span><br><span class="line">$ make</span><br></pre></td></tr></table></figure>
+<p>2、 启动Demo server, 该终端不要关闭：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> example/zinx_server</span><br><span class="line">$ ./server </span><br><span class="line">                                  </span><br><span class="line"></span><br><span class="line">              ██                        </span><br><span class="line">              ▀▀                        </span><br><span class="line"> ████████   ████     ██▄████▄  ▀██  ██▀ </span><br><span class="line">     ▄█▀      ██     ██▀   ██    ████   </span><br><span class="line">   ▄█▀        ██     ██    ██    ▄██▄   </span><br><span class="line"> ▄██▄▄▄▄▄  ▄▄▄██▄▄▄  ██    ██   ▄█▀▀█▄  </span><br><span class="line"> ▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀  ▀▀    ▀▀  ▀▀▀  ▀▀▀ </span><br><span class="line">┌───────────────────────────────────────────────────┐</span><br><span class="line">│ [Github] https://github.com/aceld                 │</span><br><span class="line">│ [tutorial] https://www.kancloud.cn/aceld/zinx     │</span><br><span class="line">└───────────────────────────────────────────────────┘</span><br><span class="line">[Zinx] Version: V0.11, MaxConn: 3, MaxPacketSize: 4096</span><br><span class="line">Add api msgId =  0</span><br><span class="line">Add api msgId =  1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[START] Server name: zinx server Demo,listenner at IP: 127.0.0.1, Port 8999 is starting</span><br><span class="line">Worker ID =  0  is started.</span><br><span class="line">Worker ID =  1  is started.</span><br><span class="line">Worker ID =  2  is started.</span><br><span class="line">Worker ID =  3  is started.</span><br><span class="line">Worker ID =  4  is started.</span><br><span class="line">Worker ID =  7  is started.</span><br><span class="line">Worker ID =  6  is started.</span><br><span class="line">Worker ID =  8  is started.</span><br><span class="line">Worker ID =  9  is started.</span><br><span class="line">Worker ID =  5  is started.</span><br><span class="line">start Zinx server   zinx server Demo  succ, now listenning...</span><br></pre></td></tr></table></figure>
+<p>1、 再打开新终端，启动client Demo测试通信</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> example/zinx_client</span><br><span class="line">$ ./client</span><br><span class="line">==&gt; Test Router:[Ping] Recv Msg: ID= 2 , len= 21 , data= DoConnection BEGIN... ==&gt; Test Router:[Ping] Recv Msg: ID= 0 , len= 18 , data= ping...ping...ping </span><br><span class="line">==&gt; Test Router:[Ping] Recv Msg: ID= 0 , len= 18 , data= ping...ping...ping</span><br><span class="line">==&gt; Test Router:[Ping] Recv Msg: ID= 0 , len= 18 , data= ping...ping...ping</span><br></pre></td></tr></table></figure>
+    </div>
+  </div>
+  <div class="switch-page">
+    
+      <a class="previous" href="/介绍.html">Previous</a>
+    
+    
+      <a class="next" href="/源码.html">Next</a>
+    
+  </div>
+</body>
+</html>

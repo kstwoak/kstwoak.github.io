@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>ZINX - 配置</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700" rel="stylesheet" type="text/css">
+  <link href="/css/docs.css" rel="stylesheet">
+  
+</head>
+<body>
+  <div class="menu">
+    <div class="logo">
+    </div>
+
+
+  
+    <nav class="menu-nav">
+      
+        <ul class="nav">
+          <span>介绍</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/介绍.html">介绍</a>
+              </li>
+            
+              <li>
+                <a href="/快速启动.html">快速启动</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+        <ul class="nav">
+          <span>学习资源</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/源码.html">源码</a>
+              </li>
+            
+              <li>
+                <a href="/视频.html">视频</a>
+              </li>
+            
+              <li>
+                <a href="/文档.html">文档</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+        <ul class="nav">
+          <span>开发文档</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/架构介绍.html">架构介绍</a>
+              </li>
+            
+              <li>
+                <a href="/服务端API.html">服务端API</a>
+              </li>
+            
+              <li>
+                <a href="/客户端API.html">客户端API</a>
+              </li>
+            
+              <li>
+                <a href="/配置.html" class="active">配置</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+        <ul class="nav">
+          <span>关于</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/开发者.html">开发者</a>
+              </li>
+            
+              <li>
+                <a href="/技术讨论.html">技术讨论</a>
+              </li>
+            
+              <li>
+                <a href="/产品案例.html">产品案例</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+    </nav>
+    <a class="footer" href="https://github.com/aceld/zinx">
+      ZINX on github
+    </a>
+  </div>
+  <div class="page">
+    <div class="header-label">
+    <li class="menu-item">
+            <iframe src="https://ghbtns.com/github-btn.html?user=aceld&repo=zinx&type=star&count=true&size=large&v=3" frameborder="0" scrolling="0" width="150px" height="30px"></iframe>
+    </li>
+    <li class="menu-item">
+            <iframe src="https://ghbtns.com/github-btn.html?user=aceld&repo=zinx&type=fork&count=true&size=large&v=2" frameborder="0" scrolling="0" width="150px" height="30px"></iframe>
+    </li>
+    </div>
+    <div class="page-content">
+      <h1>配置</h1>
+      <h3 id="zinx配置文件"><a class="markdownIt-Anchor" href="#zinx配置文件"></a> Zinx配置文件</h3>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"Name"</span>:<span class="string">"zinx v-0.10 demoApp"</span>,</span><br><span class="line">  <span class="attr">"Host"</span>:<span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="attr">"TcpPort"</span>:<span class="number">7777</span>,</span><br><span class="line">  <span class="attr">"MaxConn"</span>:<span class="number">3</span>,</span><br><span class="line">  <span class="attr">"WorkerPoolSize"</span>:<span class="number">10</span>,</span><br><span class="line">  <span class="attr">"LogDir"</span>: <span class="string">"./mylog"</span>,</span><br><span class="line">  <span class="attr">"LogFile"</span>:<span class="string">"zinx.log"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Name</code>:服务器应用名称</p>
+<p><code>Host</code>:服务器IP</p>
+<p><code>TcpPort</code>:服务器监听端口</p>
+<p><code>MaxConn</code>:允许的客户端链接最大数量</p>
+<p><code>WorkerPoolSize</code>:工作任务池最大工作Goroutine数量</p>
+<p><code>LogDir</code>: 日志文件夹</p>
+<p><code>LogFile</code>: 日志文件名称(如果不提供，则日志信息打印到Stderr)</p>
+
+    </div>
+  </div>
+  <div class="switch-page">
+    
+      <a class="previous" href="/客户端API.html">Previous</a>
+    
+    
+      <a class="next" href="/开发者.html">Next</a>
+    
+  </div>
+</body>
+</html>

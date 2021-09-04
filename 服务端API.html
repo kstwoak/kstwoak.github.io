@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>ZINX - 服务端API</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700" rel="stylesheet" type="text/css">
+  <link href="/css/docs.css" rel="stylesheet">
+  
+</head>
+<body>
+  <div class="menu">
+    <div class="logo">
+    </div>
+
+
+  
+    <nav class="menu-nav">
+      
+        <ul class="nav">
+          <span>介绍</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/介绍.html">介绍</a>
+              </li>
+            
+              <li>
+                <a href="/快速启动.html">快速启动</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+        <ul class="nav">
+          <span>学习资源</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/源码.html">源码</a>
+              </li>
+            
+              <li>
+                <a href="/视频.html">视频</a>
+              </li>
+            
+              <li>
+                <a href="/文档.html">文档</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+        <ul class="nav">
+          <span>开发文档</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/架构介绍.html">架构介绍</a>
+              </li>
+            
+              <li>
+                <a href="/服务端API.html" class="active">服务端API</a>
+              </li>
+            
+              <li>
+                <a href="/客户端API.html">客户端API</a>
+              </li>
+            
+              <li>
+                <a href="/配置.html">配置</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+        <ul class="nav">
+          <span>关于</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/开发者.html">开发者</a>
+              </li>
+            
+              <li>
+                <a href="/技术讨论.html">技术讨论</a>
+              </li>
+            
+              <li>
+                <a href="/产品案例.html">产品案例</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+    </nav>
+    <a class="footer" href="https://github.com/aceld/zinx">
+      ZINX on github
+    </a>
+  </div>
+  <div class="page">
+    <div class="header-label">
+    <li class="menu-item">
+            <iframe src="https://ghbtns.com/github-btn.html?user=aceld&repo=zinx&type=star&count=true&size=large&v=3" frameborder="0" scrolling="0" width="150px" height="30px"></iframe>
+    </li>
+    <li class="menu-item">
+            <iframe src="https://ghbtns.com/github-btn.html?user=aceld&repo=zinx&type=fork&count=true&size=large&v=2" frameborder="0" scrolling="0" width="150px" height="30px"></iframe>
+    </li>
+    </div>
+    <div class="page-content">
+      <h1>服务端API</h1>
+      <h4 id="server"><a class="markdownIt-Anchor" href="#server"></a> server</h4>
+<p>基于Zinx框架开发的服务器应用，主函数步骤比较精简，最多只需要3步即可。</p>
+<ol>
+<li>创建server句柄</li>
+<li>配置自定义路由及业务</li>
+<li>启动服务</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">//1 创建一个server句柄</span></span><br><span class="line">	s := znet.NewServer()</span><br><span class="line"></span><br><span class="line">	<span class="comment">//2 配置路由</span></span><br><span class="line">	s.AddRouter(<span class="number">0</span>, &amp;PingRouter&#123;&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="comment">//3 开启服务</span></span><br><span class="line">	s.Serve()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中自定义路由及业务配置方式如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"github.com/aceld/zinx/ziface"</span></span><br><span class="line">	<span class="string">"github.com/aceld/zinx/znet"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//ping test 自定义路由</span></span><br><span class="line"><span class="keyword">type</span> PingRouter <span class="keyword">struct</span> &#123;</span><br><span class="line">	znet.BaseRouter</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Ping Handle</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(this *PingRouter)</span> <span class="title">Handle</span><span class="params">(request ziface.IRequest)</span></span> &#123;</span><br><span class="line">	<span class="comment">//先读取客户端的数据</span></span><br><span class="line">	fmt.Println(<span class="string">"recv from client : msgId="</span>, request.GetMsgID(), <span class="string">", data="</span>, <span class="keyword">string</span>(request.GetData()))</span><br><span class="line"></span><br><span class="line">    <span class="comment">//再回写ping...ping...ping</span></span><br><span class="line">	err := request.GetConnection().SendBuffMsg(<span class="number">0</span>, []<span class="keyword">byte</span>(<span class="string">"ping...ping...ping"</span>))</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="i服务器模块server"><a class="markdownIt-Anchor" href="#i服务器模块server"></a> I.服务器模块Server</h3>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewServer</span> <span class="params">()</span> <span class="title">ziface</span>.<span class="title">IServer</span></span></span><br></pre></td></tr></table></figure>
+<p>创建一个Zinx服务器句柄，该句柄作为当前服务器应用程序的主枢纽，包括如下功能：</p>
+<h4 id="1开启服务"><a class="markdownIt-Anchor" href="#1开启服务"></a> 1)开启服务</h4>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Server)</span> <span class="title">Start</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="2停止服务"><a class="markdownIt-Anchor" href="#2停止服务"></a> 2)停止服务</h4>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Server)</span> <span class="title">Stop</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="3运行服务"><a class="markdownIt-Anchor" href="#3运行服务"></a> 3)运行服务</h4>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Server)</span> <span class="title">Serve</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="4注册路由"><a class="markdownIt-Anchor" href="#4注册路由"></a> 4)注册路由</h4>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Server)</span> <span class="title">AddRouter</span> <span class="params">(msgId <span class="keyword">uint32</span>, router ziface.IRouter)</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="5注册链接创建hook函数"><a class="markdownIt-Anchor" href="#5注册链接创建hook函数"></a> 5)注册链接创建Hook函数</h4>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Server)</span> <span class="title">SetOnConnStart</span><span class="params">(hookFunc <span class="keyword">func</span> (ziface.IConnection)</span>)</span></span><br></pre></td></tr></table></figure>
+<h4 id="6注册链接销毁hook函数"><a class="markdownIt-Anchor" href="#6注册链接销毁hook函数"></a> 6)注册链接销毁Hook函数</h4>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Server)</span> <span class="title">SetOnConnStop</span><span class="params">(hookFunc <span class="keyword">func</span> (ziface.IConnection)</span>)</span></span><br></pre></td></tr></table></figure>
+<h3 id="ii路由模块"><a class="markdownIt-Anchor" href="#ii路由模块"></a> II.路由模块</h3>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实现router时，先嵌入这个基类，然后根据需要对这个基类的方法进行重写</span></span><br><span class="line"><span class="keyword">type</span> BaseRouter <span class="keyword">struct</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这里之所以BaseRouter的方法都为空，</span></span><br><span class="line"><span class="comment">// 是因为有的Router不希望有PreHandle或PostHandle</span></span><br><span class="line"><span class="comment">// 所以Router全部继承BaseRouter的好处是，不需要实现PreHandle和PostHandle也可以实例化</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(br *BaseRouter)</span><span class="title">PreHandle</span><span class="params">(req ziface.IRequest)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(br *BaseRouter)</span><span class="title">Handle</span><span class="params">(req ziface.IRequest)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(br *BaseRouter)</span><span class="title">PostHandle</span><span class="params">(req ziface.IRequest)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="iii链接模块"><a class="markdownIt-Anchor" href="#iii链接模块"></a> III.链接模块</h3>
+<h4 id="1获取原始的socket-tcpconn"><a class="markdownIt-Anchor" href="#1获取原始的socket-tcpconn"></a> 1)获取原始的socket TCPConn</h4>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Connection)</span> <span class="title">GetTCPConnection</span><span class="params">()</span> *<span class="title">net</span>.<span class="title">TCPConn</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="2获取链接id"><a class="markdownIt-Anchor" href="#2获取链接id"></a> 2)获取链接ID</h4>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Connection)</span> <span class="title">GetConnID</span><span class="params">()</span> <span class="title">uint32</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="3获取远程客户端地址信息"><a class="markdownIt-Anchor" href="#3获取远程客户端地址信息"></a> 3)获取远程客户端地址信息</h4>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Connection)</span> <span class="title">RemoteAddr</span><span class="params">()</span> <span class="title">net</span>.<span class="title">Addr</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="4发送消息"><a class="markdownIt-Anchor" href="#4发送消息"></a> 4)发送消息</h4>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Connection)</span> <span class="title">SendMsg</span><span class="params">(msgId <span class="keyword">uint32</span>, data []<span class="keyword">byte</span>)</span> <span class="title">error</span> </span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(c *Connection)</span> <span class="title">SendBuffMsg</span><span class="params">(msgId <span class="keyword">uint32</span>, data []<span class="keyword">byte</span>)</span> <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="5链接属性"><a class="markdownIt-Anchor" href="#5链接属性"></a> 5)链接属性</h4>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置链接属性</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Connection)</span> <span class="title">SetProperty</span><span class="params">(key <span class="keyword">string</span>, value <span class="keyword">interface</span>&#123;&#125;)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">//获取链接属性</span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(c *Connection)</span> <span class="title">GetProperty</span><span class="params">(key <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">interface</span>&#123;&#125;, error)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">//移除链接属性</span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="params">(c *Connection)</span> <span class="title">RemoveProperty</span><span class="params">(key <span class="keyword">string</span>)</span></span></span><br></pre></td></tr></table></figure>
+
+    </div>
+  </div>
+  <div class="switch-page">
+    
+      <a class="previous" href="/架构介绍.html">Previous</a>
+    
+    
+      <a class="next" href="/客户端API.html">Next</a>
+    
+  </div>
+</body>
+</html>

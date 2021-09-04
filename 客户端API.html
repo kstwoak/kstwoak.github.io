@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>ZINX - 客户端API</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.0.0/normalize.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700" rel="stylesheet" type="text/css">
+  <link href="/css/docs.css" rel="stylesheet">
+  
+</head>
+<body>
+  <div class="menu">
+    <div class="logo">
+    </div>
+
+
+  
+    <nav class="menu-nav">
+      
+        <ul class="nav">
+          <span>介绍</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/介绍.html">介绍</a>
+              </li>
+            
+              <li>
+                <a href="/快速启动.html">快速启动</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+        <ul class="nav">
+          <span>学习资源</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/源码.html">源码</a>
+              </li>
+            
+              <li>
+                <a href="/视频.html">视频</a>
+              </li>
+            
+              <li>
+                <a href="/文档.html">文档</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+        <ul class="nav">
+          <span>开发文档</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/架构介绍.html">架构介绍</a>
+              </li>
+            
+              <li>
+                <a href="/服务端API.html">服务端API</a>
+              </li>
+            
+              <li>
+                <a href="/客户端API.html" class="active">客户端API</a>
+              </li>
+            
+              <li>
+                <a href="/配置.html">配置</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+        <ul class="nav">
+          <span>关于</span>
+          <ul class="nav">
+            
+              <li>
+                <a href="/开发者.html">开发者</a>
+              </li>
+            
+              <li>
+                <a href="/技术讨论.html">技术讨论</a>
+              </li>
+            
+              <li>
+                <a href="/产品案例.html">产品案例</a>
+              </li>
+            
+          </ul>
+        </ul>
+      
+    </nav>
+    <a class="footer" href="https://github.com/aceld/zinx">
+      ZINX on github
+    </a>
+  </div>
+  <div class="page">
+    <div class="header-label">
+    <li class="menu-item">
+            <iframe src="https://ghbtns.com/github-btn.html?user=aceld&repo=zinx&type=star&count=true&size=large&v=3" frameborder="0" scrolling="0" width="150px" height="30px"></iframe>
+    </li>
+    <li class="menu-item">
+            <iframe src="https://ghbtns.com/github-btn.html?user=aceld&repo=zinx&type=fork&count=true&size=large&v=2" frameborder="0" scrolling="0" width="150px" height="30px"></iframe>
+    </li>
+    </div>
+    <div class="page-content">
+      <h1>客户端API</h1>
+      <h4 id="client"><a class="markdownIt-Anchor" href="#client"></a> client</h4>
+<p>Zinx的消息处理采用，<code>[MsgLength]|[MsgID]|[Data]</code>的封包格式</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"io"</span></span><br><span class="line">	<span class="string">"net"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">	<span class="string">"github.com/aceld/zinx/znet"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	模拟客户端</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"Client Test ... start"</span>)</span><br><span class="line">	<span class="comment">//3秒之后发起测试请求，给服务端开启服务的机会</span></span><br><span class="line">	time.Sleep(<span class="number">3</span> * time.Second)</span><br><span class="line"></span><br><span class="line">	conn,err := net.Dial(<span class="string">"tcp"</span>, <span class="string">"127.0.0.1:7777"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">"client start err, exit!"</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> n := <span class="number">3</span>; n &gt;= <span class="number">0</span>; n-- &#123;</span><br><span class="line">		<span class="comment">//发封包message消息</span></span><br><span class="line">		dp := znet.NewDataPack()</span><br><span class="line">		msg, _ := dp.Pack(znet.NewMsgPackage(<span class="number">0</span>,[]<span class="keyword">byte</span>(<span class="string">"Zinx Client Test Message"</span>)))</span><br><span class="line">		_, err := conn.Write(msg)</span><br><span class="line">		<span class="keyword">if</span> err !=<span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"write error err "</span>, err)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//先读出流中的head部分</span></span><br><span class="line">		headData := <span class="built_in">make</span>([]<span class="keyword">byte</span>, dp.GetHeadLen())</span><br><span class="line">		_, err = io.ReadFull(conn, headData) <span class="comment">//ReadFull 会把msg填充满为止</span></span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"read head error"</span>)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//将headData字节流 拆包到msg中</span></span><br><span class="line">		msgHead, err := dp.Unpack(headData)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"server unpack err:"</span>, err)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> msgHead.GetDataLen() &gt; <span class="number">0</span> &#123;</span><br><span class="line">			<span class="comment">//msg 是有data数据的，需要再次读取data数据</span></span><br><span class="line">			msg := msgHead.(*znet.Message)</span><br><span class="line">			msg.Data = <span class="built_in">make</span>([]<span class="keyword">byte</span>, msg.GetDataLen())</span><br><span class="line"></span><br><span class="line">			<span class="comment">//根据dataLen从io中读取字节流</span></span><br><span class="line">			_, err := io.ReadFull(conn, msg.Data)</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">				fmt.Println(<span class="string">"server unpack data err:"</span>, err)</span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			fmt.Println(<span class="string">"==&gt; Recv Msg: ID="</span>, msg.Id, <span class="string">", len="</span>, msg.DataLen, <span class="string">", data="</span>, <span class="keyword">string</span>(msg.Data))</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		time.Sleep(<span class="number">1</span>*time.Second)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+  </div>
+  <div class="switch-page">
+    
+      <a class="previous" href="/服务端API.html">Previous</a>
+    
+    
+      <a class="next" href="/配置.html">Next</a>
+    
+  </div>
+</body>
+</html>
